@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 mt-3">
+                <div class="d-flex justify-content-center">
+                    <h2>Registration</h2>
+                </div>
+            </div>
+            <div class="col-md-3">&nbsp;</div>
+            <div class="col-md-6">
+                {{forms}}
+                <div class="pull-right mt-2">
+                    <input type="reset" class="btn btn-sm btn-danger" value="Clear">
+                    <input type="submit" class="btn btn-sm  btn-primary" value="Submit">
+                </div>
+            </div>
+            <div class="col-md-3">&nbsp;</div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
