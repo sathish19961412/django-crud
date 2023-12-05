@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="p-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="d-flex justify-content-center mb-3">
+                    <h4 class="text-primary">Update Data</h4>
+                </div>
+                <form  method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{forms}}
+                    <div class="pull-right mt-2">
+                        <input type="submit" class="btn btn-sm  btn-primary" value="Update">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

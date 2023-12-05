@@ -1,22 +1,77 @@
 {% extends 'base.html' %}
 {% block content %}
-<section>
+
+<style>
+    th{
+        text-align: center;
+    }
+    td{
+        text-align: center;
+    }
+</style>
+<section class="p-5">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 mt-3">
-                <div class="d-flex justify-content-center">
-                    <h2>Registration</h2>
+            <div class="col-md-4">
+                <div class="d-flex justify-content-center mb-3">
+                    <h4 class="text-primary">Registration</h4>
                 </div>
+                <form  method="POST" action="addData">
+                    {% csrf_token %}
+                    {{forms}}
+                    <div class="pull-right mt-2">
+                        <input type="reset" class="btn btn-sm btn-danger" value="Clear">
+                        <input type="submit" class="btn btn-sm  btn-primary" value="Submit">
+                    </div>
+                </form>
+                
             </div>
-            <div class="col-md-3">&nbsp;</div>
-            <div class="col-md-6">
-                {{forms}}
-                <div class="pull-right mt-2">
-                    <input type="reset" class="btn btn-sm btn-danger" value="Clear">
-                    <input type="submit" class="btn btn-sm  btn-primary" value="Submit">
+            <div class="col-md-8">
+                {% if datas %}
+                <div class="d-flex justify-content-center mb-3">
+                    <h4 class="text-primary">View Registration</h4>
                 </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                            <div class="alert alert-danger">
+                                {{message}}
+                            </div>
+                        {% else %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{message}}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <table class="table table-bordered mt-5">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Name</th>
+                            <th>Contact</th>
+                            <th>Address</th>
+                            <th>Mail</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in datas %}
+                            <tr>
+                                <td style="text-align:center;">{{forloop.counter}}</td>
+                                <td>{{data.name}}</td>
+                                <td>{{data.contact}}</td>
+                                <td>{{data.address}}</td>
+                                <td>{{data.mail}}</td>
+                                <td><a href="updateData/{{data.id}}" class="btn btn-success text-white">Edit</a></td>
+                                <td><a href="deleteData/{{data.id}}" class="btn btn-danger text-white">Delete</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
             </div>
-            <div class="col-md-3">&nbsp;</div>
         </div>
     </div>
 </section>
